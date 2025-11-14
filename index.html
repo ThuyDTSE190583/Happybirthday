@@ -1,0 +1,1041 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Happy Birthday</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <!--<meta itemprop="image" content="./images/fenxiang.png" />-->
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+            color: #CFEBE4;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            letter-spacing: 1.2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            /* fallback */
+            min-height: 100dvh;
+            /* better on mobile */
+            overflow: hidden;
+            background: #000;
+        }
+
+        a {
+            color: #ebf7f4;
+        }
+
+        .text {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90vw;
+            font-size: 4vw;
+            font-weight: bold;
+            z-index: 2;
+            display: none;
+        }
+
+        .rotate-warning {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 12px;
+            width: 100vw;
+            /* Fallbacks for various mobile browsers */
+            height: 100vh;
+            height: 100dvh;
+            height: 100svh;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10;
+            display: block;
+            pointer-events: none;
+            /* không chặn thao tác chạm để bật nhạc */
+        }
+
+        .rotate-icon {
+            width: 72px;
+            height: 72px;
+            opacity: 0.9;
+            animation: rotate 2.5s linear infinite;
+        }
+
+        .rotate-text {
+            font-size: clamp(14px, 3.5vw, 18px);
+            line-height: 1.4;
+            max-width: 90vw;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media screen and (orientation: portrait) {
+            .rotate-warning {
+                display: flex;
+            }
+        }
+
+        @media screen and (orientation: landscape) {
+            .text {
+                display: block;
+            }
+
+            .rotate-warning {
+                display: none;
+            }
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        /* Smoothly fade the letter canvas when hiding it */
+        .canvas {
+            transition: opacity 0.6s ease;
+        }
+
+        img#logo {
+            width: 128px;
+            background-size: cover;
+            border-radius: 200px;
+            box-shadow: 0px 0px 40px rgba(63, 81, 181, 0.72);
+            border: 3px solid #00a0ff;
+            ;
+            opacity: 1;
+            margin: 0 auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            transition: all 1.0s;
+        }
+
+        #logo:hover {
+            box-shadow: 0 0 10px #fff;
+            -webkit-box-shadow: 0 0 19px #fff;
+            transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            /* IE 9 */
+            -moz-transform: rotate(360deg);
+            /* Firefox */
+            -webkit-transform: rotate(360deg);
+            /* Safari và Chrome */
+            -o-transform: rotate(360deg);
+            /* Opera */
+            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        }
+
+        .cs {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            position: absolute;
+            text-align: center;
+        }
+
+        .text-right {
+            position: fixed;
+            bottom: 50px;
+            text-align: right;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        /* Heart particle overlay */
+        .heart-wrap {
+            position: fixed;
+            inset: 0;
+            display: none;
+            /* shown when triggered */
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            pointer-events: none;
+            /* let clicks through for audio */
+        }
+
+        #pinkboard {
+            position: relative;
+            width: min(58vmin, 520px);
+            height: min(58vmin, 520px);
+            /* gentle beat animation */
+            animation: heart-beat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heart-beat {
+            0% {
+                transform: scale(1);
+            }
+
+            30% {
+                transform: scale(0.9);
+            }
+
+            60% {
+                transform: scale(1.07);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Hiển thị khi màn hình dọc: yêu cầu xoay ngang để xem tốt nhất -->
+    <div class="rotate-warning">
+        <svg class="rotate-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2 12a10 10 0 1 1 4.1 8" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path d="M2 12l3 3m-3-3l3-3" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+        <div class="rotate-text">Vui lòng xoay ngang điện thoại</div>
+    </div>
+    <canvas id="rainCanvas"></canvas>
+    <canvas class="canvas"></canvas>
+    <!-- Heart overlay: hidden until triggered after "YÊU" -->
+    <div class="heart-wrap" id="heartWrap">
+        <canvas id="pinkboard"></canvas>
+    </div>
+    <script language="javascript">
+        // DPR-aware canvas for background rain to keep size and centering correct on mobile
+        const canvas = document.getElementById('rainCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const letters = ' HAPPYBIRTHDAY '.split('');
+        const fontSize = 19; // slightly larger for readability
+        let columns = Math.floor(window.innerWidth / fontSize);
+        let drops = Array(columns).fill(0).map(() => -Math.random() * 20); // random start offsets
+        let speeds = Array(columns).fill(0).map(() => 0.9 + Math.random() * 0.9); // per-column speed
+
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            const width = Math.floor(window.innerWidth);
+            const height = Math.floor(window.innerHeight);
+            // Set CSS size
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+            // Set internal buffer size
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            // Scale drawing ops so units are CSS pixels
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            // Recompute columns and reset drops for new width
+            columns = Math.floor(width / fontSize);
+            drops = Array(columns).fill(0).map(() => -Math.random() * 20);
+            speeds = Array(columns).fill(0).map(() => 0.9 + Math.random() * 0.9);
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('orientationchange', resizeCanvas);
+
+        function drawRainBackground() {
+            if (window.__paused) return; // không vẽ khi đang ở màn hình dọc
+            // Use CSS pixel dimensions after transform
+            const w = canvas.clientWidth;
+            const h = canvas.clientHeight;
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+            ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = '#f584b7';
+            ctx.font = fontSize + 'px arial';
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[i % letters.length];
+                // Viền trắng cho chữ
+                ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+                ctx.lineWidth = 1;
+                ctx.strokeText(text, i * fontSize, drops[i] * fontSize);
+                // Chữ màu hồng nổi bật
+                ctx.fillStyle = '#d38dca'; // hồng nhạt hơn
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > h + fontSize * 2 || Math.random() > 0.992) drops[i] = -Math.random() * 20;
+                drops[i] += speeds[i];
+            }
+        }
+        let rainTimer = null;
+        function startRain() {
+            if (!rainTimer) {
+                rainTimer = setInterval(drawRainBackground, 50);
+            }
+        }
+        function stopRain() {
+            if (rainTimer) {
+                clearInterval(rainTimer);
+                rainTimer = null;
+            }
+        }
+    </script>
+    <script>
+        var S = {
+            init: function () {
+                S.Drawing.init('.canvas');
+                document.body.classList.add('body--ready');
+                S.UI.simulate("3|2|1|HAPPY\nBIRTHDAY|CHI TUYET ANH|XINH GÁI||NGÀY CÀNG|DỄ THW|THÀNH CÔNG|ĐẠT ĐƯỢC|ƯỚC MƠ|20-11-2001|24+|");
+                S.Drawing.loop(function () {
+                    if (!window.__paused && !window.__dotsPaused) {
+                        S.Shape.render();
+                    }
+                });
+            }
+        };
+        S.Drawing = (function () {
+            var canvas,
+                context,
+                renderFn,
+                requestFrame = window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    window.oRequestAnimationFrame ||
+                    window.msRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 1000 / 60);
+                    };
+            return {
+                init: function (el) {
+                    canvas = document.querySelector(el);
+                    context = canvas.getContext('2d');
+                    this.adjustCanvas();
+                    window.addEventListener('resize', function (e) {
+                        S.Drawing.adjustCanvas();
+                    });
+                },
+                loop: function (fn) {
+                    renderFn = !renderFn ? fn : renderFn;
+                    this.clearFrame();
+                    renderFn();
+                    requestFrame.call(window, this.loop.bind(this));
+                },
+                adjustCanvas: function () {
+                    const dpr = window.devicePixelRatio || 1;
+                    const width = Math.floor(window.innerWidth);
+                    const height = Math.floor(window.innerHeight);
+                    // Match CSS size
+                    canvas.style.width = width + 'px';
+                    canvas.style.height = height + 'px';
+                    // Internal resolution
+                    canvas.width = Math.floor(width * dpr);
+                    canvas.height = Math.floor(height * dpr);
+                    // Normalize to CSS pixel units
+                    context.setTransform(dpr, 0, 0, dpr, 0, 0);
+                },
+                clearFrame: function () {
+                    const w = canvas.clientWidth;
+                    const h = canvas.clientHeight;
+                    context.clearRect(0, 0, w, h);
+                },
+                getArea: function () {
+                    // Return CSS pixel dimensions
+                    return { w: canvas.clientWidth, h: canvas.clientHeight };
+                },
+                drawCircle: function (p, c) {
+                    context.fillStyle = c.render();
+                    context.beginPath();
+                    context.arc(p.x, p.y, p.z, 0, 2 * Math.PI, true);
+                    context.closePath();
+                    context.fill();
+                }
+            };
+        }());
+        S.UI = (function () {
+            var interval,
+                currentAction,
+                time,
+                maxShapeSize = 30,
+                sequence = [],
+                cmd = '#';
+            function formatTime(date) {
+                var h = date.getHours(),
+                    m = date.getMinutes(),
+                    m = m < 10 ? '0' + m : m;
+                return h + ':' + m;
+            }
+            function getValue(value) {
+                return value && value.split(' ')[1];
+            }
+            function getAction(value) {
+                value = value && value.split(' ')[0];
+                return value && value[0] === cmd && value.substring(1);
+            }
+            function timedAction(fn, delay, max, reverse) {
+                clearInterval(interval);
+                currentAction = reverse ? max : 1;
+                fn(currentAction);
+                if (!max || (!reverse && currentAction < max) || (reverse && currentAction > 0)) {
+                    interval = setInterval(function () {
+                        currentAction = reverse ? currentAction - 1 : currentAction + 1;
+                        fn(currentAction);
+                        if ((!reverse && max && currentAction === max) || (reverse && currentAction === 0)) {
+                            clearInterval(interval);
+                        }
+                    }, delay);
+                }
+            }
+            function performAction(value) {
+                var action,
+                    value,
+                    current;
+                // Append new actions, filtering out empty tokens to avoid blank steps caused by trailing '|'
+                sequence = typeof (value) === 'object'
+                    ? value
+                    : sequence.concat(value.split('|').filter(function (s) { return s !== ''; }));
+                timedAction(function (index) {
+                    current = sequence.shift();
+                    action = getAction(current);
+                    value = getValue(current);
+                    switch (action) {
+                        case 'countdown':
+                            value = parseInt(value) || 10;
+                            value = value > 0 ? value : 10;
+                            timedAction(function (index) {
+                                if (index === 0) {
+                                    if (sequence.length === 0) {
+                                        S.Shape.switchShape(S.ShapeBuilder.letter(''));
+                                    } else {
+                                        performAction(sequence);
+                                    }
+                                } else {
+                                    S.Shape.switchShape(S.ShapeBuilder.letter(index), true);
+                                }
+                            }, 1000, value, true);
+                            break;
+                        case 'rectangle':
+                            value = value && value.split('x');
+                            value = (value && value.length === 2) ? value : [maxShapeSize, maxShapeSize / 2];
+                            S.Shape.switchShape(S.ShapeBuilder.rectangle(Math.min(maxShapeSize, parseInt(value[0])), Math.min(maxShapeSize, parseInt(value[1]))));
+                            break;
+                        case 'circle':
+                            value = parseInt(value) || maxShapeSize;
+                            value = Math.min(value, maxShapeSize);
+                            S.Shape.switchShape(S.ShapeBuilder.circle(value));
+                            break;
+                        case 'time':
+                            var t = formatTime(new Date());
+                            if (sequence.length > 0) {
+                                S.Shape.switchShape(S.ShapeBuilder.letter(t));
+                            } else {
+                                timedAction(function () {
+                                    t = formatTime(new Date());
+                                    if (t !== time) {
+                                        time = t;
+                                        S.Shape.switchShape(S.ShapeBuilder.letter(time));
+                                    }
+                                }, 1000);
+                            }
+                            break;
+                        default:
+                            S.Shape.switchShape(S.ShapeBuilder.letter(current[0] === cmd ? 'HacPai' : current));
+                            // If this was the last item of the sequence, trigger the heart animation
+                            try {
+                                if (sequence.length === 0 && !window.__paused) {
+                                    // avoid double-trigger if simulate() is called again
+                                    if (!window.__heartShown) {
+                                        window.__heartShown = true;
+                                        setTimeout(function () {
+                                            if (typeof startPinkHeart === 'function') startPinkHeart();
+                                        }, 1200);
+                                    }
+                                }
+                            } catch (e) { }
+                    }
+                }, 2000, sequence.length);
+            }
+            return {
+                simulate: function (action) {
+                    performAction(action);
+                }
+            };
+        }());
+        // Pink particle heart (from your snippet), made start/stop controlled and responsive
+        (function () {
+            const wrap = document.getElementById('heartWrap');
+            const canvas = document.getElementById('pinkboard');
+            if (!wrap || !canvas) return;
+
+            // Settings adapted
+            const settings = {
+                particles: {
+                    length: 1600,   // slightly reduced for mobile perf
+                    duration: 2,
+                    velocity: 100,
+                    effect: -1.3,
+                    size: 20,
+                },
+            };
+            // Dynamic scale for heart shape so it fits smaller within the canvas (better on phones)
+            let heartScale = 1;
+
+            // Math helpers
+            function Point(x, y) { this.x = x || 0; this.y = y || 0; }
+            Point.prototype.clone = function () { return new Point(this.x, this.y); };
+            Point.prototype.length = function (len) {
+                if (len === undefined) return Math.sqrt(this.x * this.x + this.y * this.y);
+                const l = this.length(); this.x /= l; this.y /= l; this.x *= len; this.y *= len; return this;
+            };
+            function Particle() { this.position = new Point(); this.velocity = new Point(); this.acceleration = new Point(); this.age = 0; }
+            Particle.prototype.initialize = function (x, y, dx, dy) {
+                this.position.x = x; this.position.y = y; this.velocity.x = dx; this.velocity.y = dy;
+                this.acceleration.x = dx * settings.particles.effect;
+                this.acceleration.y = dy * settings.particles.effect;
+                this.age = 0;
+            };
+            Particle.prototype.update = function (dt) {
+                this.position.x += this.velocity.x * dt; this.position.y += this.velocity.y * dt;
+                this.velocity.x += this.acceleration.x * dt; this.velocity.y += this.acceleration.y * dt;
+                this.age += dt;
+            };
+            Particle.prototype.draw = function (ctx, img) {
+                function ease(t) { return (--t) * t * t + 1; }
+                const size = img.width * ease(this.age / settings.particles.duration);
+                ctx.globalAlpha = 1 - this.age / settings.particles.duration;
+                ctx.drawImage(img, this.position.x - size / 2, this.position.y - size / 2, size, size);
+            };
+            function ParticlePool(length) {
+                this.particles = new Array(length);
+                for (let i = 0; i < length; i++) this.particles[i] = new Particle();
+                this.firstActive = 0; this.firstFree = 0; this.duration = settings.particles.duration;
+            }
+            ParticlePool.prototype.add = function (x, y, dx, dy) {
+                const p = this.particles[this.firstFree]; p.initialize(x, y, dx, dy);
+                this.firstFree = (this.firstFree + 1) % this.particles.length;
+                if (this.firstActive === this.firstFree) this.firstActive = (this.firstActive + 1) % this.particles.length;
+            };
+            ParticlePool.prototype.update = function (dt) {
+                let i;
+                if (this.firstActive < this.firstFree) {
+                    for (i = this.firstActive; i < this.firstFree; i++) this.particles[i].update(dt);
+                } else {
+                    for (i = this.firstActive; i < this.particles.length; i++) this.particles[i].update(dt);
+                    for (i = 0; i < this.firstFree; i++) this.particles[i].update(dt);
+                }
+                while (this.particles[this.firstActive].age >= this.duration && this.firstActive !== this.firstFree) {
+                    this.firstActive = (this.firstActive + 1) % this.particles.length;
+                }
+            };
+            ParticlePool.prototype.draw = function (ctx, img) {
+                let i;
+                if (this.firstActive < this.firstFree) {
+                    for (i = this.firstActive; i < this.firstFree; i++) this.particles[i].draw(ctx, img);
+                } else {
+                    for (i = this.firstActive; i < this.particles.length; i++) this.particles[i].draw(ctx, img);
+                    for (i = 0; i < this.firstFree; i++) this.particles[i].draw(ctx, img);
+                }
+            };
+
+            function pointOnHeart(t) {
+                return new Point(
+                    160 * Math.pow(Math.sin(t), 3),
+                    130 * Math.cos(t) - 50 * Math.cos(2 * t) - 20 * Math.cos(3 * t) - 10 * Math.cos(4 * t) + 25
+                );
+            }
+            // build particle image (a pink filled heart)
+            function buildImage() {
+                const c = document.createElement('canvas'); const cx = c.getContext('2d');
+                c.width = settings.particles.size; c.height = settings.particles.size;
+                function to(t) {
+                    const p = pointOnHeart(t);
+                    p.x = settings.particles.size / 2 + p.x * settings.particles.size / 350;
+                    p.y = settings.particles.size / 2 - p.y * settings.particles.size / 350;
+                    return p;
+                }
+                cx.beginPath();
+                let t = -Math.PI, p = to(t); cx.moveTo(p.x, p.y);
+                while (t < Math.PI) { t += 0.01; p = to(t); cx.lineTo(p.x, p.y); }
+                cx.closePath(); cx.fillStyle = '#FF5CA4'; cx.fill();
+                const img = new Image(); img.src = c.toDataURL();
+                return img;
+            }
+
+            let raf = null, pool = null, image = null, ctx = canvas.getContext('2d'), lastTime = null;
+            function resize() {
+                canvas.width = canvas.clientWidth;
+                canvas.height = canvas.clientHeight;
+                // Target heart to use ~70-80% of the smaller canvas dimension (and allow it to be smaller overall)
+                const minDim = Math.max(1, Math.min(canvas.width, canvas.height));
+                // 400 is an approximate normalization factor for the base heart extents (~320-420px)
+                heartScale = (minDim / 400) * 1.1; // 0.8 makes it noticeably smaller
+                heartScale = Math.max(0.5, Math.min(heartScale, 1.4)); // clamp to sensible range
+            }
+            function render() {
+                raf = requestAnimationFrame(render);
+                if (window.__paused) return;
+                const now = Date.now() / 1000; const dt = now - (lastTime || now); lastTime = now;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                const amount = (settings.particles.length / settings.particles.duration) * dt;
+                for (let i = 0; i < amount; i++) {
+                    const pos = pointOnHeart(Math.PI - 2 * Math.PI * Math.random());
+                    // Apply dynamic scaling so the heart renders smaller and fits the canvas on phones
+                    pos.x *= heartScale;
+                    pos.y *= heartScale;
+                    const dir = pos.clone().length(settings.particles.velocity);
+                    pool.add(canvas.width / 2 + pos.x, canvas.height / 2 - pos.y, dir.x, -dir.y);
+                }
+                pool.update(dt);
+                pool.draw(ctx, image);
+
+                // Vẽ chữ ở giữa trái tim, co giãn theo kích thước canvas để phù hợp điện thoại
+                ctx.save();
+                // Base font size relative to the smaller dimension, clamped for readability
+                var minDim = Math.max(1, Math.min(canvas.width, canvas.height));
+                var fs = Math.max(14, Math.min(28, Math.floor(minDim * 0.045))); // 4.5% of minDim, 14-28px
+                ctx.font = 'bold ' + fs + 'px Arial, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = '#FF5CA4';
+                ctx.shadowColor = '#fff';
+                ctx.shadowBlur = 18;
+                ctx.globalAlpha = 0.92;
+                ctx.fillText('HOPE THIS MAKES YOU SMILE', canvas.width / 2, canvas.height / 2);
+                ctx.restore();
+            }
+
+            window.startPinkHeart = function () {
+                if (window.__paused) return;
+                if (raf) return; // already running
+                // Hide the letter canvas and pause its render so last text (e.g., '20+') isn't visible
+                try {
+                    const letterCanvas = document.querySelector('.canvas');
+                    if (letterCanvas) letterCanvas.style.opacity = '0';
+                    window.__dotsPaused = true;
+                } catch (e) {}
+                wrap.style.display = 'flex';
+                image = buildImage();
+                pool = new ParticlePool(settings.particles.length);
+                lastTime = null;
+                resize();
+                render();
+            };
+            window.stopPinkHeart = function () {
+                if (raf) { cancelAnimationFrame(raf); raf = null; }
+                if (ctx) { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+                wrap.style.display = 'none';
+                // Optionally show the letter canvas again and resume dots when heart stops
+                try {
+                    const letterCanvas = document.querySelector('.canvas');
+                    if (letterCanvas) letterCanvas.style.opacity = '1';
+                    window.__dotsPaused = false;
+                } catch (e) {}
+            };
+            window.addEventListener('resize', resize);
+        })();
+        S.Point = function (args) {
+            this.x = args.x;
+            this.y = args.y;
+            this.z = args.z;
+            this.a = args.a;
+            this.h = args.h;
+        };
+        S.Color = function (r, g, b, a) {
+            this.r = r;
+            this.g = g;
+            this.b = b;
+            this.a = a;
+        };
+        S.Color.prototype = {
+            render: function () {
+                return 'rgba(' + this.r + ',' + +this.g + ',' + this.b + ',' + this.a + ')';
+            }
+        };
+        S.Dot = function (x, y) {
+            this.p = new S.Point({
+                x: x,
+                y: y,
+                z: 3.5,
+                a: 1,
+                h: 0
+            });
+            this.e = 0.065;
+            this.s = true;
+            // Đổi màu chấm hiển thị chữ từ trắng sang xám đen (#444)
+            this.c = new S.Color(232, 232, 232, this.p.a);
+            this.t = this.clone();
+            this.q = [];
+        };
+        S.Dot.prototype = {
+            clone: function () {
+                return new S.Point({
+                    x: this.x,
+                    y: this.y,
+                    z: this.z,
+                    a: this.a,
+                    h: this.h
+                });
+            },
+            _draw: function () {
+                this.c.a = this.p.a;
+                S.Drawing.drawCircle(this.p, this.c);
+            },
+            _moveTowards: function (n) {
+                var details = this.distanceTo(n, true),
+                    dx = details[0],
+                    dy = details[1],
+                    d = details[2],
+                    e = this.e * d;
+                if (this.p.h === -1) {
+                    this.p.x = n.x;
+                    this.p.y = n.y;
+                    return true;
+                }
+                if (d > 1) {
+                    this.p.x -= ((dx / d) * e);
+                    this.p.y -= ((dy / d) * e);
+                } else {
+                    if (this.p.h > 0) {
+                        this.p.h--;
+                    } else {
+                        return true;
+                    }
+                }
+                return false;
+            },
+            _update: function () {
+                if (this._moveTowards(this.t)) {
+                    var p = this.q.shift();
+                    if (p) {
+                        this.t.x = p.x || this.p.x;
+                        this.t.y = p.y || this.p.y;
+                        this.t.z = p.z || this.p.z;
+                        this.t.a = p.a || this.p.a;
+                        this.p.h = p.h || 0;
+                    } else {
+                        if (this.s) {
+                            this.p.x -= Math.sin(Math.random() * 3.142);
+                            this.p.y -= Math.sin(Math.random() * 3.142);
+                        } else {
+                            this.move(new S.Point({
+                                x: this.p.x + (Math.random() * 50) - 25,
+                                y: this.p.y + (Math.random() * 50) - 25
+                            }));
+                        }
+                    }
+                }
+                d = this.p.a - this.t.a;
+                this.p.a = Math.max(0.1, this.p.a - (d * 0.05));
+                d = this.p.z - this.t.z;
+                this.p.z = Math.max(1, this.p.z - (d * 0.05));
+            },
+            distanceTo: function (n, details) {
+                var dx = this.p.x - n.x,
+                    dy = this.p.y - n.y,
+                    d = Math.sqrt(dx * dx + dy * dy);
+                return details ? [dx, dy, d] : d;
+            },
+            move: function (p, avoidStatic) {
+                if (!avoidStatic || (avoidStatic && this.distanceTo(p) > 1)) {
+                    this.q.push(p);
+                }
+            },
+            render: function () {
+                this._update();
+                this._draw();
+            }
+        };
+        S.ShapeBuilder = (function () {
+            var gap = 10, // more dots for sharper letters
+                shapeCanvas = document.createElement('canvas'),
+                shapeContext = shapeCanvas.getContext('2d'),
+                baseFontSize = 200, // base size for measuring before scaling
+                maxFontSize = 700,
+                fontFamily = 'Avenir, Helvetica Neue, Helvetica, Arial, sans-serif';
+            function fit() {
+                shapeCanvas.width = Math.floor(window.innerWidth / gap) * gap;
+                shapeCanvas.height = Math.floor(window.innerHeight / gap) * gap;
+                shapeContext.fillStyle = 'black'; // high contrast for sampling
+                shapeContext.textBaseline = 'alphabetic';
+                shapeContext.textAlign = 'center';
+            }
+            function processCanvas() {
+                var w = shapeCanvas.width,
+                    h = shapeCanvas.height,
+                    data = shapeContext.getImageData(0, 0, w, h).data,
+                    dots = [],
+                    minX = w, minY = h, maxX = 0, maxY = 0,
+                    threshold = 120; // alpha threshold to include pixel
+
+                for (var y = 0; y < h; y += gap) {
+                    for (var x = 0; x < w; x += gap) {
+                        var idx = (y * w + x) * 4 + 3; // alpha channel
+                        if (data[idx] > threshold) {
+                            dots.push(new S.Point({ x: x, y: y }));
+                            if (x < minX) minX = x;
+                            if (y < minY) minY = y;
+                            if (x > maxX) maxX = x;
+                            if (y > maxY) maxY = y;
+                        }
+                    }
+                }
+
+                if (dots.length === 0) return { dots: [], w: 0, h: 0 };
+
+                var width = Math.max(0, maxX - minX);
+                var height = Math.max(0, maxY - minY);
+                for (var i = 0; i < dots.length; i++) {
+                    dots[i].x -= minX;
+                    dots[i].y -= minY;
+                }
+                return { dots: dots, w: width, h: height };
+            }
+            function setFontSize(s) {
+                shapeContext.font = 'bold ' + s + 'px ' + fontFamily;
+            }
+            function setFontColor(color) {
+                shapeContext.fillStyle = color;
+            }
+            function isNumber(n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            }
+            function init() {
+                fit();
+                window.addEventListener('resize', fit);
+            }
+            // Init
+            init();
+            return {
+                imageFile: function (url, callback) {
+                    var image = new Image(),
+                        a = S.Drawing.getArea();
+                    image.onload = function () {
+                        shapeContext.clearRect(0, 0, shapeCanvas.width, shapeCanvas.height);
+                        shapeContext.drawImage(this, 0, 0, a.h * 0.6, a.h * 0.6);
+                        callback(processCanvas());
+                    };
+                    image.onerror = function () {
+                        callback(S.ShapeBuilder.letter('What?'));
+                    };
+                    image.src = url;
+                },
+                circle: function (d) {
+                    var r = Math.max(0, d) / 2;
+                    shapeContext.clearRect(0, 0, shapeCanvas.width, shapeCanvas.height);
+                    shapeContext.beginPath();
+                    shapeContext.arc(r * gap, r * gap, r * gap, 0, 2 * Math.PI, false);
+                    shapeContext.fill();
+                    shapeContext.closePath();
+                    return processCanvas();
+                },
+                letter: function (l) {
+                    var lines = l.split('\n');
+                    var marginX = shapeCanvas.width * 0.05;  // 5% side margins
+                    var marginY = shapeCanvas.height * 0.10; // 10% top/bottom margins
+                    var availW = Math.max(0, shapeCanvas.width - marginX * 2);
+                    var availH = Math.max(0, shapeCanvas.height - marginY * 2);
+
+                    // Measure at base font size to compute scaling
+                    setFontSize(baseFontSize);
+                    var maxLineWidth = 0;
+                    var ascent = 0, descent = 0;
+                    for (var i = 0; i < lines.length; i++) {
+                        var m = shapeContext.measureText(lines[i]);
+                        maxLineWidth = Math.max(maxLineWidth, m.width);
+                        // actualBoundingBox* are widely supported in modern browsers; fallback if undefined
+                        ascent = Math.max(ascent, m.actualBoundingBoxAscent || baseFontSize * 0.8);
+                        descent = Math.max(descent, m.actualBoundingBoxDescent || baseFontSize * 0.2);
+                    }
+                    var lineH = ascent + descent; // estimated line height at base size
+                    var lineSpacing = baseFontSize * 0.2; // 20% spacing between lines
+                    var totalH = lines.length * lineH + Math.max(0, (lines.length - 1)) * lineSpacing;
+
+                    var scaleW = maxLineWidth > 0 ? (availW / maxLineWidth) : 1;
+                    var scaleH = totalH > 0 ? (availH / totalH) : 1;
+                    var scale = Math.min(scaleW, scaleH);
+                    var s = Math.min(maxFontSize, Math.max(12, baseFontSize * scale));
+
+                    // Draw at final size, centered
+                    setFontSize(s);
+                    shapeContext.clearRect(0, 0, shapeCanvas.width, shapeCanvas.height);
+                    setFontColor('black');
+
+                    // Re-measure with final size for accurate placement
+                    var mAsc = 0, mDesc = 0, mWidths = [];
+                    for (var j = 0; j < lines.length; j++) {
+                        var mm = shapeContext.measureText(lines[j]);
+                        mAsc = Math.max(mAsc, mm.actualBoundingBoxAscent || s * 0.8);
+                        mDesc = Math.max(mDesc, mm.actualBoundingBoxDescent || s * 0.2);
+                        mWidths.push(mm.width);
+                    }
+                    var lh = mAsc + mDesc;
+                    var ls = s * 0.2;
+                    var contentH = lines.length * lh + Math.max(0, (lines.length - 1)) * ls;
+                    var startY = (shapeCanvas.height - contentH) / 2 + mAsc; // baseline of first line
+
+                    for (var k = 0; k < lines.length; k++) {
+                        var y = startY + k * (lh + ls);
+                        shapeContext.fillText(lines[k], shapeCanvas.width / 2, y);
+                    }
+                    return processCanvas();
+                },
+                rectangle: function (w, h) {
+                    var dots = [],
+                        width = gap * w,
+                        height = gap * h;
+                    for (var y = 0; y < height; y += gap) {
+                        for (var x = 0; x < width; x += gap) {
+                            dots.push(new S.Point({
+                                x: x,
+                                y: y
+                            }));
+                        }
+                    }
+                    return { dots: dots, w: width, h: height };
+                }
+            };
+        }());
+        S.Shape = (function () {
+            var dots = [],
+                width = 0,
+                height = 0,
+                cx = 0,
+                cy = 0;
+            function compensate() {
+                var a = S.Drawing.getArea();
+                cx = a.w / 2 - width / 2;
+                cy = a.h / 2 - height / 2;
+            }
+            return {
+                shuffleIdle: function () {
+                    var a = S.Drawing.getArea();
+                    for (var d = 0; d < dots.length; d++) {
+                        if (!dots[d].s) {
+                            dots[d].move({
+                                x: Math.random() * a.w,
+                                y: Math.random() * a.h
+                            });
+                        }
+                    }
+                },
+                switchShape: function (n, fast) {
+                    var size,
+                        a = S.Drawing.getArea();
+                    width = n.w;
+                    height = n.h;
+                    // Compute centroid for better visual centering, especially on small/mobile screens
+                    if (n.dots && n.dots.length) {
+                        var sx = 0, sy = 0;
+                        for (var ci = 0; ci < n.dots.length; ci++) { sx += n.dots[ci].x; sy += n.dots[ci].y; }
+                        var centroidX = sx / n.dots.length;
+                        var centroidY = sy / n.dots.length;
+                        cx = a.w / 2 - centroidX;
+                        cy = a.h / 2 - centroidY;
+                    } else {
+                        compensate();
+                    }
+                    if (n.dots.length > dots.length) {
+                        size = n.dots.length - dots.length;
+                        for (var d = 1; d <= size; d++) {
+                            dots.push(new S.Dot(a.w / 2, a.h / 2));
+                        }
+                    }
+                    var d = 0,
+                        i = 0;
+                    while (n.dots.length > 0) {
+                        i = Math.floor(Math.random() * n.dots.length);
+                        dots[d].e = fast ? 0.25 : (dots[d].s ? 0.14 : 0.11);
+                        if (dots[d].s) {
+                            dots[d].move(new S.Point({
+                                z: Math.random() * 20 + 10,
+                                a: Math.random(),
+                                h: 18
+                            }));
+                        } else {
+                            dots[d].move(new S.Point({
+                                z: Math.random() * 5 + 5,
+                                h: fast ? 18 : 30
+                            }));
+                        }
+                        dots[d].s = true;
+                        dots[d].move(new S.Point({
+                            x: n.dots[i].x + cx,
+                            y: n.dots[i].y + cy,
+                            a: 1,
+                            z: 5,
+                            h: 0
+                        }));
+                        n.dots = n.dots.slice(0, i).concat(n.dots.slice(i + 1));
+                        d++;
+                    }
+                    // Loại bỏ các chấm dư thừa để tránh đám trắng lốm đốm ở nền
+                    if (dots.length > d) {
+                        dots.length = d;
+                    }
+                },
+                render: function () {
+                    for (var d = 0; d < dots.length; d++) {
+                        dots[d].render();
+                    }
+                }
+            };
+        }());
+        // Chỉ chạy nội dung khi xoay ngang; khi màn dọc chỉ hiển thị thông báo
+        window.__paused = false;
+        window.__sInited = false;
+        function handleOrientation() {
+            const portrait = window.matchMedia && window.matchMedia('(orientation: portrait)').matches
+                ? true
+                : (window.innerHeight > window.innerWidth);
+            if (portrait) {
+                window.__paused = true;
+                stopRain();
+                if (typeof stopPinkHeart === 'function') stopPinkHeart();
+            } else {
+                window.__paused = false;
+                if (!window.__sInited) {
+                    S.init();
+                    window.__sInited = true;
+                }
+                startRain();
+                // If the sequence had already finished while in portrait, show heart now
+                if (window.__heartShown && typeof startPinkHeart === 'function') {
+                    startPinkHeart();
+                }
+            }
+        }
+        handleOrientation();
+        window.addEventListener('orientationchange', handleOrientation);
+        window.addEventListener('resize', handleOrientation);
+
+        const audio = new Audio("./ly.mp3");
+        function playMusic() {
+            if (window.__paused) return; // không phát nhạc khi đang ở màn dọc
+            audio.play();
+        }
+        audio.onerror = () => alert("Không tìm thấy file ly.mp3");
+
+        window.addEventListener('click', playMusic, { passive: true });
+        window.addEventListener('touchstart', playMusic, { passive: true });
+    </script>
+
+</body>
+
+
+</html>
