@@ -1029,7 +1029,7 @@
             if (window.__paused) return; // không phát nhạc khi đang ở màn dọc
             audio.play();
         }
-        audio.onerror = () => alert("Không tìm thấy file ly.mp3");
+      
 
         window.addEventListener('click', playMusic, { passive: true });
         window.addEventListener('touchstart', playMusic, { passive: true });
@@ -1039,3 +1039,4 @@
 
 
 </html>
+
