@@ -584,8 +584,8 @@
                 // Target heart to use ~70-80% of the smaller canvas dimension (and allow it to be smaller overall)
                 const minDim = Math.max(1, Math.min(canvas.width, canvas.height));
                 // 400 is an approximate normalization factor for the base heart extents (~320-420px)
-                heartScale = (minDim / 400) * 1.1; // 0.8 makes it noticeably smaller
-                heartScale = Math.max(0.5, Math.min(heartScale, 1.4)); // clamp to sensible range
+                heartScale = (minDim / 400) * 0.8; // 0.8 makes it noticeably smaller
+                heartScale = Math.max(0.35, Math.min(heartScale, 1)); // clamp to sensible range
             }
             function render() {
                 raf = requestAnimationFrame(render);
@@ -1039,3 +1039,4 @@
 
 
 </html>
+
